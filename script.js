@@ -19,20 +19,18 @@ if (menuToggle && navLinks) {
 // Function to track and display site visitors
 function trackVisitors() {
     const countElement = document.getElementById("visitor-count");
-    if (!countElement) return; // Exit cleanly if element is not on current page
+    if (!countElement) return;
 
-    const namespace = "spawarisanmelayu-website"; // Unique key for your website
-    const key = "visits";
-
-    fetch(`https://api.countapi.xyz/hit/${namespace}/${key}`)
+    // Replaced dead api.countapi.xyz with working counterapi.dev endpoint
+    fetch("https://counterapi.dev/api/v1/spawarisanmelayu/visits/up")
         .then(response => {
-            if (!response.ok) throw new Error("Network response was not ok");
+            if (!response.ok) throw new Error("Network error");
             return response.json();
         })
         .then(data => {
-            if (data && data.value) {
+            if (data && data.count !== undefined) {
                 // Formats numbers neatly with commas (e.g., 1,250)
-                countElement.innerText = data.value.toLocaleString();
+                countElement.innerText = Number(data.count).toLocaleString();
             }
         })
         .catch(error => {
