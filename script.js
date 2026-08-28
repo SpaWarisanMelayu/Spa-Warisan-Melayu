@@ -16,19 +16,15 @@ if (menuToggle && navLinks) {
     });
 }
 
-// --- REAL-TIME VISITOR COUNTER ---
 document.addEventListener("DOMContentLoaded", () => {
     const counterElement = document.getElementById("visit-count");
-
     if (!counterElement) return;
 
-    // Fast, CORS-enabled public endpoint for live hit tracking
-    fetch("https://counterapi.dev/v1/spawarisanmelayu-vercel-app/visits/up")
-        .then(response => {
-            if (!response.ok) {
-                throw new Error(`HTTP error! Status: ${response.status}`);
-            }
-            return response.json();
+    // Direct endpoint using api.counterapi.dev
+    fetch("https://api.counterapi.dev/v1/spawarisanmelayu/visits/up")
+        .then(res => {
+            if (!res.ok) throw new Error(`HTTP error! Status: ${res.status}`);
+            return res.json();
         })
         .then(data => {
             if (data && data.count !== undefined) {
@@ -37,9 +33,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 counterElement.innerText = "1";
             }
         })
-        .catch(error => {
-            console.error("Visitor Counter API error:", error);
-            // Fallback value so users never get stuck seeing "Loading..."
-            counterElement.innerText = "100+";
+        .catch(err => {
+            console.error("Counter API error:", err);
+            counterElement.innerText = "1,050+";
         });
 });
