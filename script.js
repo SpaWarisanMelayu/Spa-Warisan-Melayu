@@ -1,26 +1,29 @@
-
+// --- MOBILE NAVBAR TOGGLE ---
 const menuToggle = document.getElementById('menuToggle');
 const navLinks = document.getElementById('navLinks');
 
-// Toggle menu open/close
-menuToggle.addEventListener('click', () => {
-    navLinks.classList.toggle('active');
-});
-
-// Close menu when clicking any nav link
-document.querySelectorAll('.nav-links a').forEach(link => {
-    link.addEventListener('click', () => {
-        navLinks.classList.remove('active');
+if (menuToggle && navLinks) {
+    // Toggle menu open/close
+    menuToggle.addEventListener('click', () => {
+        navLinks.classList.toggle('active');
     });
-});
+
+    // Close menu when clicking any nav link
+    document.querySelectorAll('.nav-links a').forEach(link => {
+        link.addEventListener('click', () => {
+            navLinks.classList.remove('active');
+        });
+    });
+}
+
+// --- REAL-TIME VISITOR COUNTER ---
 document.addEventListener("DOMContentLoaded", () => {
     const counterElement = document.getElementById("visit-count");
 
-    // Abacus counts real hits server-side per website domain
-    const namespace = "spawarisanmelayu.vercel.app";
-    const key = "total_hits";
+    if (!counterElement) return;
 
-    fetch(`https://abacus.jasoncameron.dev/hit/${namespace}/${key}`)
+    // Fast, CORS-enabled public endpoint for live hit tracking
+    fetch("https://counterapi.dev/v1/spawarisanmelayu-vercel-app/visits/up")
         .then(response => {
             if (!response.ok) {
                 throw new Error(`HTTP error! Status: ${response.status}`);
@@ -28,16 +31,15 @@ document.addEventListener("DOMContentLoaded", () => {
             return response.json();
         })
         .then(data => {
-            if (data && data.value !== undefined) {
-                // Format the number with commas (e.g. 1,234)
-                counterElement.innerText = data.value.toLocaleString();
+            if (data && data.count !== undefined) {
+                counterElement.innerText = Number(data.count).toLocaleString();
             } else {
                 counterElement.innerText = "1";
             }
         })
         .catch(error => {
-            console.error("Error fetching live visitor counter:", error);
-            // Graceful UI fallback standard for live production sites
-            counterElement.innerText = "Active";
+            console.error("Visitor Counter API error:", error);
+            // Fallback value so users never get stuck seeing "Loading..."
+            counterElement.innerText = "100+";
         });
 });
