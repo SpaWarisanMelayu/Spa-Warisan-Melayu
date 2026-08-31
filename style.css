@@ -833,3 +833,69 @@ main {
         text-shadow: 0 0 0 rgba(212, 175, 55, 0);
     }
 }
+
+/* --- EXTRA RESPONSIVE FIXES FOR MOBILE & TABLETS --- */
+
+/* Tablet Adjustments (769px to 1024px) */
+@media (max-width: 1024px) {
+    .pantang-grid {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    }
+
+    .hero-content {
+        gap: 1.5rem;
+    }
+}
+
+/* Mobile Adjustments (under 768px) */
+@media (max-width: 768px) {
+    /* Ensure action footer buttons stack nicely */
+    .action-footer {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .action-footer .info-btn,
+    .action-footer .wasap {
+        width: 100% !important;
+    }
+
+    /* Hide desktop sign button inside header on mobile to prevent overflow */
+    .navbar .sign-btn {
+        display: none;
+    }
+
+    /* Make grid layouts fit narrow phone screens */
+    .benefits-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .pantang-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .hero-title {
+        font-size: 1.6rem;
+    }
+
+    .poster-subquote {
+        font-size: 0.95rem;
+        padding: 0 10px;
+    }
+}
+
+/* Small Phones (under 480px) */
+@media (max-width: 480px) {
+    .logo {
+        font-size: 1.1rem;
+    }
+
+    .logoq {
+        width: 35px;
+        height: 35px;
+    }
+
+    .benefit-item {
+        font-size: 0.85rem;
+    }
+}
