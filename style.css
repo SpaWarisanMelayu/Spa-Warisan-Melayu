@@ -899,3 +899,47 @@ main {
         font-size: 0.85rem;
     }
 }
+
+@media (max-width: 768px) {
+    /* Adjust padding for top drawer header spacing */
+    .nav-links {
+        padding: 1.5rem 1.5rem 2rem;
+    }
+
+    /* Mobile Drawer Top Bar Setup */
+    .mobile-drawer-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        padding-bottom: 1rem;
+        margin-bottom: 1rem;
+        border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+    }
+
+    .drawer-brand {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        color: var(--gold);
+        font-family: 'Playfair Display', serif;
+        font-weight: 600;
+        font-size: 0.95rem;
+    }
+
+    .close-btn {
+        background: transparent;
+        border: none;
+        color: var(--gold);
+        font-size: 1.5rem;
+        cursor: pointer;
+        padding: 5px;
+    }
+}
+
+/* Hide drawer top header on desktop */
+@media (min-width: 769px) {
+    .mobile-drawer-header {
+        display: none !important;
+    }
+}
