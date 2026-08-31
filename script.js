@@ -42,10 +42,10 @@ function updateShopStatus() {
     
     // Check timeline calculations against boundaries
     if (currentTotalMinutes >= openTotalMinutes && currentTotalMinutes < closeTotalMinutes) {
-        badge.innerHTML = "🟢 We’re Open! (Closing tonight at 12:00 AM)";
+        badge.innerHTML = "🟢 We’re Open! <br> (Closing tonight at 12:00 AM)";
         badge.className = "status-badge open-badge";
     } else {
-        badge.innerHTML = "🔴 Currently Closed (We open tomorrow at 8:00 AM)";
+        badge.innerHTML = "🔴 Currently Closed <br> (We open tomorrow at 8:00 AM)";
         badge.className = "status-badge closed-badge";
     }
 }
