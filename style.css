@@ -724,7 +724,9 @@ main {
     color: var(--gold);
     transform: translateX(5px);
 }
-
+.footer-contact{
+    margin-bottom: 20px;
+}
 .footer-contact p {
     color: #e0d5c1;
     font-size: 0.9rem;
@@ -942,4 +944,207 @@ main {
     .mobile-drawer-header {
         display: none !important;
     }
+}
+/* ==========================================================================
+   NEW ADDITIONS: LAUNCHERS & LIVE STATUS BADGE
+   ========================================================================== */
+
+/* Main Navigation & Launcher Box */
+.navigation-card {
+    background: var(--card-bg);
+    border: 1px solid rgba(212, 175, 55, 0.25);
+    border-radius: 20px;
+    padding: 2.5rem;
+    max-width: 100%;
+    margin: 2.5rem 0 0 0;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    box-sizing: border-box;
+}
+
+.card-tag {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--gold);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.card-title {
+    font-size: 2rem;
+    color: var(--text-gold);
+    margin: 0 0 0.5rem 0;
+}
+
+.card-subtitle {
+    color: var(--text-light);
+    font-size: 0.95rem;
+    font-weight: 300;
+    margin: 0 0 1.5rem 0;
+    line-height: 1.6;
+}
+
+/* Flex Row for Buttons */
+.launcher-row {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+}
+
+/* Launcher Buttons Core Design */
+.launcher-btn {
+    flex: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 0.8rem 1.5rem;
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 1rem;
+    border-radius: 25px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.waze-btn {
+    background: linear-gradient(135deg, #33ccff, #1797c4);
+    box-shadow: 0 4px 15px rgba(51, 204, 255, 0.3);
+}
+
+.gmaps-btn {
+    background: linear-gradient(135deg, #0f9d58, #0b7240);
+    box-shadow: 0 4px 15px rgba(15, 157, 88, 0.3);
+}
+
+.launcher-btn:hover {
+    transform: translateY(-2px);
+}
+
+.launcher-btn:active {
+    transform: translateY(1px);
+    box-shadow: none;
+}
+
+/* Operating Badge Containers */
+.status-container {
+    margin: 1rem 0;
+    display: flex;
+    justify-content: center;
+}
+
+.status-badge {
+    padding: 0.5rem 1.2rem;
+    border-radius: 25px;
+    font-weight: 500;
+    font-size: 0.9rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    border: 1px solid transparent;
+}
+
+.open-badge {
+    background: rgba(40, 167, 69, 0.15);
+    color: #28a745;
+    border-color: rgba(40, 167, 69, 0.3);
+}
+
+.closed-badge {
+    background: rgba(220, 53, 69, 0.15);
+    color: #dc3545;
+    border-color: rgba(220, 53, 69, 0.3);
+}
+
+/* Responsive Overrides for Mobile Viewports */
+@media (max-width: 768px) {
+    .launcher-row {
+        flex-direction: column;
+        gap: 0.8rem;
+    }
+    
+    .launcher-btn {
+        width: 100%;
+    }
+
+    .card-title {
+        font-size: 1.6rem;
+    }
+}
+.email-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 12px 24px;
+  background-color: rgba(255, 255, 255, 0.05);
+  color: #f1c40f; /* Luxury gold accent to match spa headers */
+  border: 1px solid rgba(241, 196, 15, 0.4);
+  border-radius: 30px;
+  font-family: inherit;
+  font-size: 0.95rem;
+  font-weight: 500;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(5px);
+}
+
+/* Icon sizing */
+.email-btn i {
+  font-size: 1.1rem;
+}
+
+/* Hover Effect: Glows and elevates */
+.email-btn:hover {
+  background-color: #f1c40f;
+  color: #1a1a1a; /* Dark text on gold background */
+  border-color: #f1c40f;
+  box-shadow: 0 4px 15px rgba(241, 196, 15, 0.3);
+  transform: translateY(-2px);
+}
+
+/* Active Click Effect */
+.email-btn:active {
+  transform: translateY(0);
+  box-shadow: none;
+}
+.phone-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 12px 24px;
+  background-color: rgba(255, 255, 255, 0.05);
+  color: #f1c40f; /* Gold accent */
+  border: 1px solid rgba(241, 196, 15, 0.4);
+  border-radius: 30px;
+  font-family: inherit;
+  font-size: 0.95rem;
+  font-weight: 500;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(5px);
+}
+
+.phone-btn i {
+  font-size: 1rem;
+}
+
+/* Hover Effect */
+.phone-btn:hover {
+  background-color: #f1c40f;
+  color: #1a1a1a;
+  border-color: #f1c40f;
+  box-shadow: 0 4px 15px rgba(241, 196, 15, 0.3);
+  transform: translateY(-2px);
+}
+
+/* Active Click Effect */
+.phone-btn:active {
+  transform: translateY(0);
+  box-shadow: none;
 }

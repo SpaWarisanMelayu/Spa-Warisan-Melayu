@@ -16,43 +16,43 @@
 </head>
 
 <body>
-<header>
-    <nav class="navbar">
-        <div class="brand">
-            <img src="LOGO.png" alt="Spa Warisan Melayu Logo" class="logoq">
-            <h1 class="logo">Spa Warisan Melayu</h1>
-        </div>
+    <header>
+        <nav class="navbar">
+            <div class="brand">
+                <img src="LOGO.png" alt="Spa Warisan Melayu Logo" class="logoq">
+                <h1 class="logo">Spa Warisan Melayu</h1>
+            </div>
 
-        <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation">
-            <i class="fa-solid fa-bars"></i>
-        </button>
+            <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation">
+                <i class="fa-solid fa-bars"></i>
+            </button>
 
-        <ul class="nav-links" id="navLinks">
-            <!-- Mobile Drawer Top Bar (Logo & X Button) -->
-            <li class="mobile-drawer-header">
-                <div class="drawer-brand">
-                    <img src="LOGO.png" alt="Spa Warisan Melayu Logo" class="logoq">
-                    <span>Spa Warisan Melayu</span>
-                </div>
-                <button class="close-btn" id="closeBtn" aria-label="Close navigation">
-                    <i class="fa-solid fa-xmark"></i>
-                </button>
-            </li>
+            <ul class="nav-links" id="navLinks">
+                <!-- Mobile Drawer Top Bar (Logo & X Button) -->
+                <li class="mobile-drawer-header">
+                    <div class="drawer-brand">
+                        <img src="LOGO.png" alt="Spa Warisan Melayu Logo" class="logoq">
+                        <span>Spa Warisan Melayu</span>
+                    </div>
+                    <button class="close-btn" id="closeBtn" aria-label="Close navigation">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </li>
 
-            <li><a href="#home"><i class="fa-solid fa-house"></i><span>Home</span></a></li>
-            <li><a href="#about"><i class="fa-solid fa-circle-info"></i><span>About Us</span></a></li>
-            <li><a href="#packages"><i class="fa-solid fa-bag-shopping"></i><span>Packages</span></a></li>
-            <li><a href="#reviews"><i class="fa-solid fa-comment"></i><span>Reviews</span></a></li>
-        </ul>
+                <li><a href="#home"><i class="fa-solid fa-house"></i><span>Home</span></a></li>
+                <li><a href="#about"><i class="fa-solid fa-circle-info"></i><span>About Us</span></a></li>
+                <li><a href="#packages"><i class="fa-solid fa-bag-shopping"></i><span>Packages</span></a></li>
+                <li><a href="#reviews"><i class="fa-solid fa-comment"></i><span>Reviews</span></a></li>
+            </ul>
 
-        <div class="sign-btn">
-            <a href="shop.html" class="btn-primary">
-                <i class="fa-solid fa-store"></i>
-                <span>Shop Now</span>
-            </a>
-        </div>
-    </nav>
-</header>
+            <div class="sign-btn">
+                <a href="shop.html" class="btn-primary">
+                    <i class="fa-solid fa-store"></i>
+                    <span>Shop Now</span>
+                </a>
+            </div>
+        </nav>
+    </header>
 
     <main>
         <!-- HERO SECTION -->
@@ -343,10 +343,44 @@
             <div class="footer-col">
                 <h4>Hubungi Kami</h4>
                 <div class="footer-contact">
-                    <p><i class="fas fa-map-marker-alt"></i> GA-1, Jalan Betek, Sungai rambai, 14000 Bukit Mertajam,
-                        Pulau Pinang, Malaysia</p>
-                    <p><i class="fas fa-phone-alt"></i> +60 16-224 9596</p>
-                    <p><i class="fas fa-envelope"></i> swlegacy69@gmail.com</p>
+                    <!-- NAVIGASI & STATUS PREMIS -->
+
+                            <span class="card-tag">Operating Hours</span>
+
+                            <!-- Live Operating Hours Status Badge -->
+                            <div class="status-container">
+                                <span id="shop-status-badge" class="status-badge">Menyemak status operasi...</span>
+                            </div>
+
+                                                        <span class="card-tag">FIND US</span>
+                            <h2 class="card-title">Treat Yourself at Our Spa</h2>
+                            <p class="card-subtitle">
+                                <i class="fas fa-location"></i>GA-1, Jalan Betek, Sungai Rambai, 14000 Bukit Mertajam, Pulau Pinang
+                            </p>
+
+
+
+                                                <div class="launcher-row">
+                                <!-- Live Waze Deep Link -->
+                                <a href="https://waze.com/ul?ll=5.3566422,100.4483002&navigate=yes" target="_blank"
+                                    class="launcher-btn waze-btn">
+                                    <i class="fas fa-car"></i> Use Waze
+                                </a>
+
+                                <!-- Live Google Maps Deep Link -->
+                                <a href="https://www.google.com/maps/place/?q=place_id:ChIJfRuB8nDJSjARNvfm6JDb61Y"
+                                    target="_blank" class="launcher-btn gmaps-btn">
+                                    <i class="fas fa-map-marked-alt"></i> Use Google Maps
+                                </a>
+                            </div>
+                    <a href="tel:+60162249596" class="phone-btn">
+                        <i class="fas fa-phone-alt"></i>
+                        <span>+60 16-224 9596</span>
+                    </a>
+                    <a href="mailto:swlegacy69@gmail.com" class="email-btn">
+                        <i class="fas fa-envelope"></i>
+                        <span>swlegacy69@gmail.com</span>
+                    </a>
                     <p><i class="fas fa-clock"></i> Isnin - Ahad: Booking Only</p>
                 </div>
             </div>
