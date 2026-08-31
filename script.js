@@ -50,72 +50,42 @@ function updateShopStatus() {
     }
 }
 
-// --- LIVE OPERATING HOURS STATUS BADGE ---
-function updateShopStatus() {
-    const statusBadge = document.getElementById("shop-status-badge");
-    if (!statusBadge) return;
-
-    // Get current time in Malaysia (UTC+8)
-    const now = new Date();
-    const options = { timeZone: "Asia/Kuala_Lumpur", hour12: false, hour: "numeric", minute: "numeric" };
-    const timeString = new Intl.DateTimeFormat([], options).format(now);
-    const [hour, minute] = timeString.split(":").map(Number);
-    const currentDecimalTime = hour + minute / 60;
-
-    // Define operating hours (e.g., 9:00 AM to 7:00 PM)
-    const openTime = 9.0;
-    const closeTime = 19.0;
-
-    if (currentDecimalTime >= openTime && currentDecimalTime < closeTime) {
-        statusBadge.className = "status-badge open-badge";
-        statusBadge.innerHTML = '<i class="fas fa-circle" style="font-size: 8px;"></i> Buka Sekarang (Open)';
-    } else {
-        statusBadge.className = "status-badge closed-badge";
-        statusBadge.innerHTML = '<i class="fas fa-circle" style="font-size: 8px;"></i> Tutup (Closed)';
-    }
-}
-
-// --- VISITOR COUNTER & INITIALIZATION ---
+// --- VISITOR COUNTER API (UPDATED FOR V2 STANDARD) ---
 document.addEventListener("DOMContentLoaded", () => {
-    // 1. Initialize Operating Hours Badge
+    // Run operating hours script on DOM initialization
     updateShopStatus();
 
-    // 2. Mobile Navbar Toggle Setup
-    const menuToggle = document.getElementById("menuToggle");
-    const closeBtn = document.getElementById("closeBtn");
-    const navLinks = document.getElementById("navLinks");
-
-    if (menuToggle && navLinks) {
-        menuToggle.addEventListener("click", () => navLinks.classList.add("active"));
-    }
-    if (closeBtn && navLinks) {
-        closeBtn.addEventListener("click", () => navLinks.classList.remove("active"));
-    }
-    document.querySelectorAll(".nav-links a").forEach(link => {
-        link.addEventListener("click", () => navLinks && navLinks.classList.remove("active"));
-    });
-
-    // 3. Visitor Counter API (Public V1 API - No Token Required)
     const counterElement = document.getElementById("visit-count");
     if (!counterElement) return;
 
-    const WORKSPACE = "spawarisanmelayu";
+    // REPLACE THESE: Use your registered Workspace name and API token from your counterapi.dev dashboard
+    const WORKSPACE = "spawarisanmelayu"; 
     const COUNTER_KEY = "visits";
+    const API_TOKEN = "your_actual_v2_access_token_here"; 
 
-    fetch(`https://api.counterapi.dev/v1/${WORKSPACE}/${COUNTER_KEY}/up`)
-        .then(res => {
-            if (!res.ok) throw new Error(`HTTP error! Status: ${res.status}`);
-            return res.json();
-        })
-        .then(data => {
-            if (data && data.count !== undefined) {
-                counterElement.innerText = Number(data.count).toLocaleString();
-            } else {
-                counterElement.innerText = "6,950+";
-            }
-        })
-        .catch(err => {
-            console.error("Counter API error:", err);
+    // Correct API v2 structure with target parameters
+    fetch(`https://counterapi.dev{WORKSPACE}/counters/${COUNTER_KEY}/up`, {
+        method: "POST", // V2 uses POST requests to accurately increment counts
+        headers: {
+            "Authorization": `Bearer ${API_TOKEN}`,
+            "Content-Type": "application/json"
+        }
+    })
+    .then(res => {
+        if (!res.ok) throw new Error(`HTTP error! Status: ${res.status}`);
+        return res.json();
+    })
+    .then(result => {
+        // Safe validation fallback checking for proper payload nesting
+        if (result && result.data && result.data.count !== undefined) {
+            counterElement.innerText = Number(result.data.count).toLocaleString();
+        } else {
             counterElement.innerText = "6,950+";
-        });
+        }
+    })
+    .catch(err => {
+        console.error("Counter API error:", err);
+        // Clean fallback default string so your layout never breaks for the user
+        counterElement.innerText = "6,950+"; 
+    });
 });

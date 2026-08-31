@@ -16,33 +16,50 @@
 </head>
 
 <body>
-    <header>
-        <nav class="navbar">
-            <div class="brand">
-                <img src="LOGO.png" alt="Spa Warisan Melayu Logo" class="logoq">
-                <h1 class="logo">Spa Warisan Melayu</h1>
-            </div>
+<header class="header">
+    <nav class="navbar">
+        <div class="brand">
+            <img src="LOGO.png" alt="Spa Warisan Melayu Logo" class="logoq">
+            <h1 class="logo">Spa Warisan Melayu</h1>
+        </div>
 
-            <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation">
-                <i class="fa-solid fa-bars"></i>
+        <!-- Hamburger Toggle Button (Mobile) -->
+        <button class="menu-toggle" id="menuToggle" aria-label="Open menu">
+            <i class="fa-solid fa-bars"></i>
+        </button>
+
+        <!-- Navigation Drawer/Menu -->
+        <div class="nav-links-wrapper" id="navLinks">
+            <!-- Close Button (Mobile) -->
+            <button class="menu-close" id="closeBtn" aria-label="Close menu">
+                <i class="fa-solid fa-xmark"></i>
             </button>
 
-            <ul class="nav-links" id="navLinks">
+            <ul class="nav-links">
                 <li><a href="#home"><i class="fa-solid fa-house"></i><span>Home</span></a></li>
                 <li><a href="#about"><i class="fa-solid fa-circle-info"></i><span>About Us</span></a></li>
                 <li><a href="#packages"><i class="fa-solid fa-bag-shopping"></i><span>Packages</span></a></li>
                 <li><a href="#reviews"><i class="fa-solid fa-comment"></i><span>Reviews</span></a></li>
             </ul>
 
-
-            <div class="sign-btn">
+            <!-- Mobile Shop Button (Visible inside menu drawer on small screens) -->
+            <div class="mobile-shop-btn">
                 <a href="shop.html" class="btn-primary">
                     <i class="fa-solid fa-store"></i>
                     <span>Shop Now</span>
                 </a>
             </div>
-        </nav>
-    </header>
+        </div>
+
+        <!-- Desktop Shop Button -->
+        <div class="sign-btn">
+            <a href="shop.html" class="btn-primary">
+                <i class="fa-solid fa-store"></i>
+                <span>Shop Now</span>
+            </a>
+        </div>
+    </nav>
+</header>
 
     <main>
         <!-- HERO SECTION -->

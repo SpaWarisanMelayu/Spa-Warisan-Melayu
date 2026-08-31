@@ -32,65 +32,65 @@ h1, h2, h3 {
     letter-spacing: 0.5px;
 }
 
-/* --- NAVIGATION --- */
-header {
+/* --- BASE HEADER & NAVBAR STYLES --- */
+.header {
     position: sticky;
     top: 0;
     z-index: 1000;
-    background: rgba(28, 16, 11, 0.9);
+    background: rgba(28, 16, 11, 0.95);
     backdrop-filter: blur(10px);
-    border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+    border-bottom: 1px solid rgba(212, 175, 55, 0.3);
 }
 
 .navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0.8rem 2rem;
+    padding: 0.8rem 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .brand {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 10px;
 }
 
 .logoq {
     width: 45px;
     height: 45px;
-    border-radius: 50%;
-    border: 1px solid var(--gold);
+    object-fit: contain;
 }
 
 .logo {
-    font-size: 1.4rem;
-    color: var(--gold);
+    color: var(--gold, #d4af37);
+    font-size: 1.3rem;
+    font-weight: 700;
     margin: 0;
+    white-space: nowrap;
 }
 
-.menu-toggle {
-    display: none;
-    background: transparent;
-    border: none;
-    color: var(--gold);
-    font-size: 1.6rem;
-    cursor: pointer;
+/* Desktop Navigation */
+.nav-links-wrapper {
+    display: flex;
+    align-items: center;
 }
 
 .nav-links {
     display: flex;
+    align-items: center;
+    gap: 1.8rem;
     list-style: none;
-    gap: 2rem;
     margin: 0;
     padding: 0;
 }
 
 .nav-links a {
-    color: var(--text-light);
+    color: #e0d5c1;
     text-decoration: none;
     font-size: 0.95rem;
+    font-weight: 500;
     display: flex;
     align-items: center;
     gap: 8px;
@@ -98,29 +98,194 @@ header {
 }
 
 .nav-links a i {
-    color: var(--gold);
+    color: var(--gold, #d4af37);
 }
 
 .nav-links a:hover {
-    color: var(--gold);
+    color: var(--gold, #d4af37);
+}
+
+/* Base Buttons */
+.menu-toggle,
+.menu-close,
+.mobile-shop-btn,
+.mobile-nav-links {
+    display: none;
 }
 
 .btn-primary {
-    background: linear-gradient(135deg, var(--gold), #997a15);
-    color: #120906;
-    padding: 0.5rem 1.2rem;
-    border-radius: 25px;
-    text-decoration: none;
-    font-weight: 500;
     display: inline-flex;
     align-items: center;
     gap: 8px;
+    background: linear-gradient(135deg, #d4af37, #aa820a);
+    color: #120905;
+    padding: 0.6rem 1.2rem;
+    border-radius: 20px;
+    font-weight: 600;
+    text-decoration: none;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .btn-primary:hover {
     transform: translateY(-2px);
-    box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
+    box-shadow: 0 4px 12px rgba(212, 175, 55, 0.4);
+}
+
+/* --- RESPONSIVE MEDIA QUERIES --- */
+
+/* Tablet Adjustments (769px to 1024px) */
+@media (max-width: 1024px) {
+    .nav-links {
+        gap: 1.2rem;
+    }
+    
+    .nav-links a span {
+        font-size: 0.9rem;
+    }
+
+    .pantang-grid {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    }
+
+    .hero-content {
+        gap: 1.5rem;
+    }
+}
+
+/* Mobile Adjustments (under 768px) */
+/* Mobile Adjustments (under 768px) */
+@media (max-width: 768px) {
+    
+    .menu-toggle {
+        display: block;
+        background: transparent;
+        border: none;
+        color: var(--gold, #d4af37);
+        font-size: 1.5rem;
+        cursor: pointer;
+    }
+
+    .menu-close {
+        display: block;
+        position: absolute;
+        top: 1.2rem;
+        right: 1.2rem;
+        background: transparent;
+        border: none;
+        color: var(--gold, #d4af37);
+        font-size: 1.8rem;
+        cursor: pointer;
+        z-index: 1002;
+    }
+
+    /* Off-Canvas Slide Drawer Hidden State */
+    .nav-links-wrapper {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 280px;
+        height: 100vh;
+        background: #120905;
+        border-left: 1px solid rgba(212, 175, 55, 0.3);
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: flex-start !important;
+        align-items: stretch !important;
+        padding: 5rem 1.5rem 2rem !important;
+        transition: right 0.4s ease-in-out;
+        box-shadow: -5px 0 20px rgba(0, 0, 0, 0.8);
+        z-index: 1001;
+        overflow-y: auto;
+    }
+
+    /* Drawer Active State */
+    .nav-links-wrapper.active {
+        right: 0 !important;
+    }
+
+    /* Target the Unordered List inside drawer */
+    .nav-links-wrapper ul.nav-links {
+        display: flex !important;
+        flex-direction: column !important;
+        width: 100% !important;
+        gap: 0.5rem !important;
+        padding: 0 !important;
+        margin: 0 0 1.5rem 0 !important;
+        list-style: none !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+    }
+
+    .nav-links-wrapper ul.nav-links li {
+        width: 100% !important;
+        display: block !important;
+        margin: 0 !important;
+    }
+
+    .nav-links-wrapper ul.nav-links li a {
+        display: flex !important;
+        align-items: center !important;
+        gap: 12px !important;
+        color: #f5e6d3 !important;
+        font-size: 1.05rem !important;
+        font-weight: 500 !important;
+        text-decoration: none !important;
+        padding: 0.75rem 1rem !important;
+        background: rgba(212, 175, 55, 0.08);
+        border: 1px solid rgba(212, 175, 55, 0.2);
+        border-radius: 8px;
+        width: 100% !important;
+        box-sizing: border-box !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+    }
+
+    .nav-links-wrapper ul.nav-links li a i {
+        color: var(--gold, #d4af37) !important;
+        font-size: 1.1rem !important;
+        width: 20px;
+        text-align: center;
+    }
+
+    .nav-links-wrapper ul.nav-links li a span {
+        color: #f5e6d3 !important;
+        display: inline-block !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+    }
+
+    /* Shop button inside drawer */
+    .mobile-shop-btn, .mobile-nav-links{
+        display: block !important;
+        width: 100% !important;
+        margin-top: 0.5rem !important;
+    }
+
+    .mobile-shop-btn .btn-primary {
+        width: 100% !important;
+        justify-content: center !important;
+        box-sizing: border-box !important;
+    }
+
+    /* Hide desktop shop button from main header bar on mobile */
+    .navbar > .sign-btn {
+        display: none !important;
+    }
+}
+/* Small Phones (under 480px) */
+@media (max-width: 480px) {
+    .logo {
+        font-size: 1.05rem;
+    }
+
+    .logoq {
+        width: 35px;
+        height: 35px;
+    }
+
+    .benefit-item {
+        font-size: 0.85rem;
+    }
 }
 
 /* --- MAIN CONTENT & HERO --- */
@@ -531,7 +696,7 @@ main {
         display: block;
     }
 
-    .nav-links {
+    .nav-links{
         position: fixed;
         top: 0;
         right: -100%;
@@ -834,71 +999,6 @@ main {
     }
 }
 
-/* --- EXTRA RESPONSIVE FIXES FOR MOBILE & TABLETS --- */
-
-/* Tablet Adjustments (769px to 1024px) */
-@media (max-width: 1024px) {
-    .pantang-grid {
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    }
-
-    .hero-content {
-        gap: 1.5rem;
-    }
-}
-
-/* Mobile Adjustments (under 768px) */
-@media (max-width: 768px) {
-    /* Ensure action footer buttons stack nicely */
-    .action-footer {
-        flex-direction: column;
-        width: 100%;
-    }
-
-    .action-footer .info-btn,
-    .action-footer .wasap {
-        width: 100% !important;
-    }
-
-    /* Hide desktop sign button inside header on mobile to prevent overflow */
-    .navbar .sign-btn {
-        display: none;
-    }
-
-    /* Make grid layouts fit narrow phone screens */
-    .benefits-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .pantang-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .hero-title {
-        font-size: 1.6rem;
-    }
-
-    .poster-subquote {
-        font-size: 0.95rem;
-        padding: 0 10px;
-    }
-}
-
-/* Small Phones (under 480px) */
-@media (max-width: 480px) {
-    .logo {
-        font-size: 1.1rem;
-    }
-
-    .logoq {
-        width: 35px;
-        height: 35px;
-    }
-
-    .benefit-item {
-        font-size: 0.85rem;
-    }
-}
 
 /* --- ENHANCED FOOTER STYLES --- */
 .footer {
