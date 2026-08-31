@@ -613,13 +613,25 @@ main {
         padding: 1.2rem;
     }
 }
-/* --- FOOTER STYLES --- */
+/* --- ENHANCED FOOTER STYLES --- */
 .footer {
-    background: rgba(18, 9, 6, 0.95);
-    border-top: 1px solid rgba(212, 175, 55, 0.3);
-    padding: 3.5rem 0 0;
-    margin-top: 4rem;
+    background: linear-gradient(180deg, rgba(28, 16, 11, 0.96) 0%, rgba(12, 6, 4, 0.99) 100%);
+    border-top: 1px solid rgba(212, 175, 55, 0.35);
+    padding: 4rem 0 0;
+    margin-top: 5rem;
     position: relative;
+    box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.footer::before {
+    content: '';
+    position: absolute;
+    top: -1px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
 }
 
 .footer-container {
@@ -627,7 +639,7 @@ main {
     margin: 0 auto;
     padding: 0 2rem;
     display: grid;
-    grid-template-columns: 1.5fr 1fr 1.25fr;
+    grid-template-columns: 1.2fr 0.8fr 1.5fr;
     gap: 3rem;
 }
 
@@ -649,6 +661,7 @@ main {
     background: var(--gold);
 }
 
+/* Brand Column */
 .footer-brand .footer-logo {
     display: flex;
     align-items: center;
@@ -676,8 +689,8 @@ main {
 }
 
 .footer-socials a {
-    width: 38px;
-    height: 38px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
     background: rgba(212, 175, 55, 0.1);
     border: 1px solid rgba(212, 175, 55, 0.3);
@@ -696,6 +709,7 @@ main {
     box-shadow: 0 4px 12px rgba(212, 175, 55, 0.4);
 }
 
+/* Links Column */
 .footer-links {
     list-style: none;
     padding: 0;
@@ -724,58 +738,156 @@ main {
     color: var(--gold);
     transform: translateX(5px);
 }
-.footer-contact{
-    margin-bottom: 20px;
+
+/* Contact & Launchers Column */
+.footer-contact {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
 }
-.footer-contact p {
+
+.card-tag {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--gold);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-top: 0.4rem;
+}
+
+.card-subtitle {
     color: #e0d5c1;
     font-size: 0.9rem;
-    margin-bottom: 0.8rem;
+    font-weight: 300;
+    margin: 0;
+    line-height: 1.5;
     display: flex;
     align-items: flex-start;
-    gap: 10px;
-    font-weight: 300;
+    gap: 8px;
 }
 
-.footer-contact i {
+.card-subtitle i {
     color: var(--gold);
-    margin-top: 4px;
+    margin-top: 3px;
+    flex-shrink: 0;
 }
 
-.footer-bottom {
-    margin-top: 3rem;
-    padding: 1.2rem 2rem;
-    text-align: center;
-    border-top: 1px solid rgba(212, 175, 55, 0.15);
-    background: rgba(10, 5, 3, 0.6);
+/* Launchers & Action Buttons */
+.launcher-row {
+    display: flex;
+    gap: 0.8rem;
+    margin: 0.4rem 0;
 }
 
-.footer-bottom p {
-    margin: 0;
-    color: #a89f91;
-    font-size: 0.85rem;
+.launcher-btn {
+    flex: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 0.65rem 1rem;
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.88rem;
+    border-radius: 20px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.waze-btn {
+    background: linear-gradient(135deg, #33ccff, #1797c4);
+    box-shadow: 0 4px 12px rgba(51, 204, 255, 0.25);
+}
+
+.gmaps-btn {
+    background: linear-gradient(135deg, #0f9d58, #0b7240);
+    box-shadow: 0 4px 12px rgba(15, 157, 88, 0.25);
+}
+
+.launcher-btn:hover {
+    transform: translateY(-2px);
+}
+
+.contact-buttons-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    margin-top: 0.4rem;
+}
+
+.phone-btn, .email-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 10px 18px;
+    background-color: rgba(255, 255, 255, 0.04);
+    color: var(--text-gold);
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    border-radius: 25px;
+    font-size: 0.88rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.phone-btn:hover, .email-btn:hover {
+    background-color: var(--gold);
+    color: var(--dark-bg);
+    border-color: var(--gold);
+    box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+    transform: translateY(-2px);
+}
+
+.booking-hours {
+    color: #e0d5c1;
+    font-size: 0.88rem;
     font-weight: 300;
+    margin-top: 0.4rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
 }
 
-/* --- FOOTER RESPONSIVE --- */
-@media (max-width: 768px) {
-    .footer-container {
-        grid-template-columns: 1fr;
-        gap: 2rem;
-    }
-
-    .footer {
-        padding-top: 2.5rem;
-    }
+.booking-hours i {
+    color: var(--gold);
 }
 
-/* --- VISITOR COUNTER --- */
+/* Operating Status Badges */
+.status-container {
+    display: flex;
+    align-items: center;
+}
+
+.status-badge {
+    padding: 0.35rem 0.9rem;
+    border-radius: 20px;
+    font-weight: 500;
+    font-size: 0.82rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.open-badge {
+    background: rgba(40, 167, 69, 0.15);
+    color: #28a745;
+    border: 1px solid rgba(40, 167, 69, 0.3);
+}
+
+.closed-badge {
+    background: rgba(220, 53, 69, 0.15);
+    color: #dc3545;
+    border: 1px solid rgba(220, 53, 69, 0.3);
+}
+
+/* Visitor Counter */
 .visitor-counter {
     background: var(--card-bg);
     border: 1px solid rgba(212, 175, 55, 0.3);
     border-radius: 30px;
     padding: 0.6rem 1.5rem;
-    margin: 1.5rem auto 0;
+    margin: 2.5rem auto 0;
     width: fit-content;
     display: flex;
     align-items: center;
@@ -802,6 +914,7 @@ main {
 .visitor-counter i {
     color: var(--gold);
     font-size: 0.95rem;
+    animation: goldPulse 2s infinite ease-in-out;
 }
 
 #visit-count {
@@ -814,337 +927,42 @@ main {
     border: 1px solid rgba(212, 175, 55, 0.2);
 }
 
-/* --- VISITOR COUNTER ANIMATION --- */
-.visitor-counter i {
-    color: var(--gold);
-    font-size: 0.95rem;
-    animation: goldPulse 2s infinite ease-in-out;
-}
-
 @keyframes goldPulse {
-    0% {
-        transform: scale(1);
-        text-shadow: 0 0 0 rgba(212, 175, 55, 0);
-    }
-    50% {
-        transform: scale(1.15);
-        text-shadow: 0 0 10px var(--gold), 0 0 20px rgba(212, 175, 55, 0.6);
-    }
-    100% {
-        transform: scale(1);
-        text-shadow: 0 0 0 rgba(212, 175, 55, 0);
-    }
+    0% { transform: scale(1); text-shadow: 0 0 0 rgba(212, 175, 55, 0); }
+    50% { transform: scale(1.15); text-shadow: 0 0 10px var(--gold); }
+    100% { transform: scale(1); text-shadow: 0 0 0 rgba(212, 175, 55, 0); }
 }
 
-/* --- EXTRA RESPONSIVE FIXES FOR MOBILE & TABLETS --- */
-
-/* Tablet Adjustments (769px to 1024px) */
-@media (max-width: 1024px) {
-    .pantang-grid {
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    }
-
-    .hero-content {
-        gap: 1.5rem;
-    }
-}
-
-/* Mobile Adjustments (under 768px) */
-@media (max-width: 768px) {
-    /* Ensure action footer buttons stack nicely */
-    .action-footer {
-        flex-direction: column;
-        width: 100%;
-    }
-
-    .action-footer .info-btn,
-    .action-footer .wasap {
-        width: 100% !important;
-    }
-
-    /* Hide desktop sign button inside header on mobile to prevent overflow */
-    .navbar .sign-btn {
-        display: none;
-    }
-
-    /* Make grid layouts fit narrow phone screens */
-    .benefits-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .pantang-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .hero-title {
-        font-size: 1.6rem;
-    }
-
-    .poster-subquote {
-        font-size: 0.95rem;
-        padding: 0 10px;
-    }
-}
-
-/* Small Phones (under 480px) */
-@media (max-width: 480px) {
-    .logo {
-        font-size: 1.1rem;
-    }
-
-    .logoq {
-        width: 35px;
-        height: 35px;
-    }
-
-    .benefit-item {
-        font-size: 0.85rem;
-    }
-}
-
-@media (max-width: 768px) {
-    /* Adjust padding for top drawer header spacing */
-    .nav-links {
-        padding: 1.5rem 1.5rem 2rem;
-    }
-
-    /* Mobile Drawer Top Bar Setup */
-    .mobile-drawer-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        width: 100%;
-        padding-bottom: 1rem;
-        margin-bottom: 1rem;
-        border-bottom: 1px solid rgba(212, 175, 55, 0.2);
-    }
-
-    .drawer-brand {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        color: var(--gold);
-        font-family: 'Playfair Display', serif;
-        font-weight: 600;
-        font-size: 0.95rem;
-    }
-
-    .close-btn {
-        background: transparent;
-        border: none;
-        color: var(--gold);
-        font-size: 1.5rem;
-        cursor: pointer;
-        padding: 5px;
-    }
-}
-
-/* Hide drawer top header on desktop */
-@media (min-width: 769px) {
-    .mobile-drawer-header {
-        display: none !important;
-    }
-}
-/* ==========================================================================
-   NEW ADDITIONS: LAUNCHERS & LIVE STATUS BADGE
-   ========================================================================== */
-
-/* Main Navigation & Launcher Box */
-.navigation-card {
-    background: var(--card-bg);
-    border: 1px solid rgba(212, 175, 55, 0.25);
-    border-radius: 20px;
-    padding: 2.5rem;
-    max-width: 100%;
-    margin: 2.5rem 0 0 0;
+/* Footer Bottom Bar */
+.footer-bottom {
+    margin-top: 2.5rem;
+    padding: 1.2rem 2rem;
     text-align: center;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-    box-sizing: border-box;
+    border-top: 1px solid rgba(212, 175, 55, 0.15);
+    background: rgba(10, 5, 3, 0.7);
 }
 
-.card-tag {
+.footer-bottom p {
+    margin: 0;
+    color: #a89f91;
     font-size: 0.85rem;
-    font-weight: 600;
-    color: var(--gold);
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    display: block;
-    margin-bottom: 0.5rem;
-}
-
-.card-title {
-    font-size: 2rem;
-    color: var(--text-gold);
-    margin: 0 0 0.5rem 0;
-}
-
-.card-subtitle {
-    color: var(--text-light);
-    font-size: 0.95rem;
     font-weight: 300;
-    margin: 0 0 1.5rem 0;
-    line-height: 1.6;
 }
 
-/* Flex Row for Buttons */
-.launcher-row {
-    display: flex;
-    gap: 1rem;
-    justify-content: center;
+/* Mobile Responsiveness */
+@media (max-width: 992px) {
+    .footer-container {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+    }
 }
 
-/* Launcher Buttons Core Design */
-.launcher-btn {
-    flex: 1;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    padding: 0.8rem 1.5rem;
-    color: #ffffff;
-    text-decoration: none;
-    font-weight: 500;
-    font-size: 1rem;
-    border-radius: 25px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.waze-btn {
-    background: linear-gradient(135deg, #33ccff, #1797c4);
-    box-shadow: 0 4px 15px rgba(51, 204, 255, 0.3);
-}
-
-.gmaps-btn {
-    background: linear-gradient(135deg, #0f9d58, #0b7240);
-    box-shadow: 0 4px 15px rgba(15, 157, 88, 0.3);
-}
-
-.launcher-btn:hover {
-    transform: translateY(-2px);
-}
-
-.launcher-btn:active {
-    transform: translateY(1px);
-    box-shadow: none;
-}
-
-/* Operating Badge Containers */
-.status-container {
-    margin: 1rem 0;
-    display: flex;
-    justify-content: center;
-}
-
-.status-badge {
-    padding: 0.5rem 1.2rem;
-    border-radius: 25px;
-    font-weight: 500;
-    font-size: 0.9rem;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    border: 1px solid transparent;
-}
-
-.open-badge {
-    background: rgba(40, 167, 69, 0.15);
-    color: #28a745;
-    border-color: rgba(40, 167, 69, 0.3);
-}
-
-.closed-badge {
-    background: rgba(220, 53, 69, 0.15);
-    color: #dc3545;
-    border-color: rgba(220, 53, 69, 0.3);
-}
-
-/* Responsive Overrides for Mobile Viewports */
-@media (max-width: 768px) {
+@media (max-width: 480px) {
     .launcher-row {
         flex-direction: column;
-        gap: 0.8rem;
     }
     
-    .launcher-btn {
-        width: 100%;
+    .footer {
+        padding-top: 2.5rem;
     }
-
-    .card-title {
-        font-size: 1.6rem;
-    }
-}
-.email-btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  padding: 12px 24px;
-  background-color: rgba(255, 255, 255, 0.05);
-  color: #f1c40f; /* Luxury gold accent to match spa headers */
-  border: 1px solid rgba(241, 196, 15, 0.4);
-  border-radius: 30px;
-  font-family: inherit;
-  font-size: 0.95rem;
-  font-weight: 500;
-  text-decoration: none;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  backdrop-filter: blur(5px);
-}
-
-/* Icon sizing */
-.email-btn i {
-  font-size: 1.1rem;
-}
-
-/* Hover Effect: Glows and elevates */
-.email-btn:hover {
-  background-color: #f1c40f;
-  color: #1a1a1a; /* Dark text on gold background */
-  border-color: #f1c40f;
-  box-shadow: 0 4px 15px rgba(241, 196, 15, 0.3);
-  transform: translateY(-2px);
-}
-
-/* Active Click Effect */
-.email-btn:active {
-  transform: translateY(0);
-  box-shadow: none;
-}
-.phone-btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  padding: 12px 24px;
-  background-color: rgba(255, 255, 255, 0.05);
-  color: #f1c40f; /* Gold accent */
-  border: 1px solid rgba(241, 196, 15, 0.4);
-  border-radius: 30px;
-  font-family: inherit;
-  font-size: 0.95rem;
-  font-weight: 500;
-  text-decoration: none;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  backdrop-filter: blur(5px);
-}
-
-.phone-btn i {
-  font-size: 1rem;
-}
-
-/* Hover Effect */
-.phone-btn:hover {
-  background-color: #f1c40f;
-  color: #1a1a1a;
-  border-color: #f1c40f;
-  box-shadow: 0 4px 15px rgba(241, 196, 15, 0.3);
-  transform: translateY(-2px);
-}
-
-/* Active Click Effect */
-.phone-btn:active {
-  transform: translateY(0);
-  box-shadow: none;
 }
