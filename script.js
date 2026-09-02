@@ -92,3 +92,7 @@ document.addEventListener("DOMContentLoaded", () => {
       counterElement.innerText = "6,950+";
     });
 });
+
+document.querySelectorAll('img').forEach(img => {
+  img.addEventListener('contextmenu', e => e.preventDefault());
+});
