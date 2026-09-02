@@ -32,9 +32,9 @@ function updateShopStatus() {
   const currentHour = now.getHours();
   const currentMinute = now.getMinutes();
 
-  // Operating limits set to 10:00 AM (10) until 10:00 PM (22)
+  // Operating limits set to 8:00 AM (8) until 12:00 AM (00)
   const openHour = 8;
-  const closeHour = 12;
+  const closeHour = 24;
 
   const currentTotalMinutes = currentHour * 60 + currentMinute;
   const openTotalMinutes = openHour * 60;
@@ -83,7 +83,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (result && result.data && result.data.count !== undefined) {
         counterElement.innerText = Number(result.data.count).toLocaleString();
       } else {
-        counterElement.innerText = "6,950+";
+        counterElement.innerText = "69,050+";
       }
     })
     .catch((err) => {
