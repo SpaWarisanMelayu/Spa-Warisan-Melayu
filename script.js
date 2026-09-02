@@ -1,98 +1,269 @@
-// --- MOBILE NAVBAR TOGGLE ---
-const menuToggle = document.getElementById("menuToggle");
-const closeBtn = document.getElementById("closeBtn");
-const navLinks = document.getElementById("navLinks");
+/* =========================================================
+   SPA WARISAN MELAYU
+   MAIN JAVASCRIPT
+   ========================================================= */
 
-if (menuToggle && navLinks) {
-  menuToggle.addEventListener("click", () => {
-    navLinks.classList.add("active");
-  });
-}
 
-if (closeBtn && navLinks) {
-  closeBtn.addEventListener("click", () => {
-    navLinks.classList.remove("active");
-  });
-}
+/* =========================================================
+   MOBILE NAVBAR TOGGLE
+   ========================================================= */
 
-document.querySelectorAll(".nav-links a").forEach((link) => {
-  link.addEventListener("click", () => {
-    if (navLinks) {
+document.addEventListener("DOMContentLoaded", () => {
+  const menuToggle = document.getElementById("menuToggle");
+  const closeBtn = document.getElementById("closeBtn");
+  const navLinks = document.getElementById("navLinks");
+
+  // Open mobile menu
+  if (menuToggle && navLinks) {
+    menuToggle.addEventListener("click", () => {
+      navLinks.classList.add("active");
+
+      // Accessibility
+      menuToggle.setAttribute("aria-expanded", "true");
+    });
+  }
+
+  // Close mobile menu
+  if (closeBtn && navLinks) {
+    closeBtn.addEventListener("click", () => {
       navLinks.classList.remove("active");
+
+      if (menuToggle) {
+        menuToggle.setAttribute("aria-expanded", "false");
+      }
+    });
+  }
+
+  // Close menu when clicking a navigation link
+  document.querySelectorAll(".nav-links a").forEach((link) => {
+    link.addEventListener("click", () => {
+      if (navLinks) {
+        navLinks.classList.remove("active");
+      }
+
+      if (menuToggle) {
+        menuToggle.setAttribute("aria-expanded", "false");
+      }
+    });
+  });
+
+  // Close menu when clicking outside the drawer
+  document.addEventListener("click", (event) => {
+    if (!navLinks || !navLinks.classList.contains("active")) {
+      return;
+    }
+
+    const clickedInsideMenu = navLinks.contains(event.target);
+    const clickedToggle = menuToggle && menuToggle.contains(event.target);
+
+    if (!clickedInsideMenu && !clickedToggle) {
+      navLinks.classList.remove("active");
+
+      if (menuToggle) {
+        menuToggle.setAttribute("aria-expanded", "false");
+      }
+    }
+  });
+
+  // Close menu when pressing ESC
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && navLinks) {
+      navLinks.classList.remove("active");
+
+      if (menuToggle) {
+        menuToggle.setAttribute("aria-expanded", "false");
+        menuToggle.focus();
+      }
     }
   });
 });
 
-// --- LIVE OPERATING HOURS STATUS INDICATOR ---
+
+/* =========================================================
+   LIVE OPERATING HOURS STATUS
+   SPA OPEN: 8:00 AM
+   SPA CLOSE: 12:00 AM
+   ========================================================= */
+
 function updateShopStatus() {
   const badge = document.getElementById("shop-status-badge");
-  if (!badge) return;
+
+  if (!badge) {
+    return;
+  }
 
   const now = new Date();
+
   const currentHour = now.getHours();
   const currentMinute = now.getMinutes();
 
-  // Operating limits set to 8:00 AM (8) until 12:00 AM (00)
-  const openHour = 8;
-  const closeHour = 24;
+  const currentTotalMinutes =
+    currentHour * 60 + currentMinute;
 
-  const currentTotalMinutes = currentHour * 60 + currentMinute;
-  const openTotalMinutes = openHour * 60;
-  const closeTotalMinutes = closeHour * 60;
+  // Operating hours
+  const openTotalMinutes = 8 * 60;       // 8:00 AM
+  const closeTotalMinutes = 24 * 60;     // 12:00 AM
 
-  // Check timeline calculations against boundaries
-  if (
+  const isOpen =
     currentTotalMinutes >= openTotalMinutes &&
-    currentTotalMinutes < closeTotalMinutes
-  ) {
-    badge.innerHTML = "🟢 We’re Open! <br> (Closing tonight at 12:00 AM)";
+    currentTotalMinutes < closeTotalMinutes;
+
+  if (isOpen) {
+    badge.innerHTML =
+      "🟢 We’re Open!<br>" +
+      "<small>(Closing tonight at 12:00 AM)</small>";
+
     badge.className = "status-badge open-badge";
   } else {
-    badge.innerHTML = "🔴 Currently Closed <br> (We open tomorrow at 8:00 AM)";
+    badge.innerHTML =
+      "🔴 Currently Closed<br>" +
+      "<small>(We open tomorrow at 8:00 AM)</small>";
+
     badge.className = "status-badge closed-badge";
   }
 }
 
-// --- VISITOR COUNTER API (UPDATED FOR V2 STANDARD) ---
+
+/* =========================================================
+   UPDATE SHOP STATUS
+   - Run immediately
+   - Refresh every minute
+   ========================================================= */
+
 document.addEventListener("DOMContentLoaded", () => {
-  // Run operating hours script on DOM initialization
   updateShopStatus();
 
-  const counterElement = document.getElementById("visit-count");
-  if (!counterElement) return;
+  // Update every 60 seconds
+  setInterval(updateShopStatus, 60 * 1000);
+});
 
-  // REPLACE THESE: Use your registered Workspace name and API token from your counterapi.dev dashboard
+
+/* =========================================================
+   VISITOR COUNTER
+   COUNTERAPI V2
+   ========================================================= */
+
+document.addEventListener("DOMContentLoaded", () => {
+  const counterElement = document.getElementById("visit-count");
+
+  if (!counterElement) {
+    return;
+  }
+
+  /*
+   * IMPORTANT:
+   * Replace the token below with your REAL CounterAPI V2 token.
+   */
+
   const WORKSPACE = "spawarisanmelayu";
   const COUNTER_KEY = "visits";
   const API_TOKEN = "your_actual_v2_access_token_here";
 
-  // Correct API v2 structure with target parameters
-  fetch(`https://counterapi.dev{WORKSPACE}/counters/${COUNTER_KEY}/up`, {
-    method: "POST", // V2 uses POST requests to accurately increment counts
+  /*
+   * Correct CounterAPI endpoint format
+   */
+  const API_URL =
+    `https://counterapi.dev/${WORKSPACE}/counters/${COUNTER_KEY}/up`;
+
+  fetch(API_URL, {
+    method: "POST",
+
     headers: {
       Authorization: `Bearer ${API_TOKEN}`,
-      "Content-Type": "application/json",
-    },
+      "Content-Type": "application/json"
+    }
   })
-    .then((res) => {
-      if (!res.ok) throw new Error(`HTTP error! Status: ${res.status}`);
-      return res.json();
-    })
-    .then((result) => {
-      // Safe validation fallback checking for proper payload nesting
-      if (result && result.data && result.data.count !== undefined) {
-        counterElement.innerText = Number(result.data.count).toLocaleString();
-      } else {
-        counterElement.innerText = "69,050+";
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(
+          `Counter API HTTP Error: ${response.status}`
+        );
       }
+
+      return response.json();
     })
-    .catch((err) => {
-      console.error("Counter API error:", err);
-      // Clean fallback default string so your layout never breaks for the user
-      counterElement.innerText = "6,950+";
+
+    .then((result) => {
+      console.log("Counter API response:", result);
+
+      /*
+       * CounterAPI V2 response
+       */
+      if (
+        result &&
+        result.data &&
+        result.data.count !== undefined
+      ) {
+        const count = Number(result.data.count);
+
+        if (!Number.isNaN(count)) {
+          counterElement.textContent =
+            count.toLocaleString();
+          return;
+        }
+      }
+
+      /*
+       * Fallback if API response is unexpected
+       */
+      counterElement.textContent = "6,950+";
+    })
+
+    .catch((error) => {
+      console.error(
+        "Visitor Counter Error:",
+        error
+      );
+
+      /*
+       * Never allow the visitor counter
+       * to break the website.
+       */
+      counterElement.textContent = "6,950+";
     });
 });
 
-document.querySelectorAll('img').forEach(img => {
-  img.addEventListener('contextmenu', e => e.preventDefault());
+
+/* =========================================================
+   PREVENT IMAGE CONTEXT MENU
+   ========================================================= */
+
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll("img").forEach((img) => {
+    img.addEventListener("contextmenu", (event) => {
+      event.preventDefault();
+    });
+  });
+});
+
+
+/* =========================================================
+   PREVENT BROKEN IMAGE DISPLAY
+   ========================================================= */
+
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll("img").forEach((img) => {
+    img.addEventListener("error", () => {
+      console.warn(
+        `Image failed to load: ${img.src}`
+      );
+    });
+  });
+});
+
+
+/* =========================================================
+   EXTERNAL LINKS
+   Add security attributes automatically
+   ========================================================= */
+
+document.addEventListener("DOMContentLoaded", () => {
+  document
+    .querySelectorAll('a[target="_blank"]')
+    .forEach((link) => {
+      link.setAttribute(
+        "rel",
+        "noopener noreferrer"
+      );
+    });
 });
