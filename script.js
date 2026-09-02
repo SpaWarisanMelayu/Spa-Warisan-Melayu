@@ -93,18 +93,4 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
-const audio = document.getElementById('myAudio');
-  
-  // Set volume to 30% (values range from 0.0 to 1.0)
-  audio.volume = 0.1;
 
-  // Attempt to unmute automatically after loading
-  // Note: If blocked by browser autoplay policy, it will remain muted until user click
-  document.addEventListener('DOMContentLoaded', () => {
-    audio.play().then(() => {
-      // Optional: Unmute if browser policy allows
-      audio.muted = false;
-    }).catch(error => {
-      console.log("Autoplay unmuted was blocked. User interaction required.");
-    });
-  });
