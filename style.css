@@ -141,7 +141,11 @@ main {
 .hero-section {
     padding: 3rem 0 1.5rem;
 }
-
+.hero-section a{
+    color: var(--gold);
+font-size: 0.95rem;
+animation: goldsPulse 1s infinite ease-in-out;
+}
 .hero-content {
     display: flex;
     align-items: center;
@@ -826,7 +830,18 @@ main {
 
 @keyframes goldPulse {
     0% { transform: scale(1); text-shadow: 0 0 0 rgba(212, 175, 55, 0); }
+    50% { transform: scale(1.05); text-shadow: 0 0 10px var(--gold); }
+    100% { transform: scale(1); text-shadow: 0 0 0 rgba(212, 175, 55, 0); }
+}
+
+@keyframes goldsPulse {
+    0% { transform: scale(1); text-shadow: 0 0 0 rgba(212, 175, 55, 0); }
     50% { transform: scale(1.15); text-shadow: 0 0 10px var(--gold); }
+    100% { transform: scale(1); text-shadow: 0 0 0 rgba(212, 175, 55, 0); }
+}
+@keyframes Pulse {
+    0% { transform: scale(1); text-shadow: 0 0 0 rgba(212, 175, 55, 0); }
+    50% { transform: scale(1.01); text-shadow: 0 0 10px var(--gold); }
     100% { transform: scale(1); text-shadow: 0 0 0 rgba(212, 175, 55, 0); }
 }
 
@@ -1157,4 +1172,14 @@ main {
         width: 170px;
         height: 170px;
     }
+    .feature-card{
+    color: var(--gold);
+font-size: 0.95rem;
+animation: Pulse 3s infinite ease-in-out;
+}
+.p-card a {
+color: var(--gold);
+font-size: 0.95rem;
+animation: goldPulse 3s infinite ease-in-out;
+}
 }
