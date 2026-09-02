@@ -92,5 +92,3 @@ document.addEventListener("DOMContentLoaded", () => {
       counterElement.innerText = "6,950+";
     });
 });
-
-
