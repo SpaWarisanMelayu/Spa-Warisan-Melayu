@@ -505,11 +505,28 @@
             <p>&copy; 2011 Spa Warisan Melayu. Copyright Reserved.</p>
         </div>
     </footer>
-    <audio id="myAudio" autoplay loop>
+    <audio id="myAudio" autoplay loop muted>
         <source src="Ganda Melati.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
     </audio>
 
+    <script>
+        const audio = document.getElementById('myAudio');
 
+        // Set volume to 30% (values range from 0.0 to 1.0)
+        audio.volume = 1.0;
+
+        // Attempt to unmute automatically after loading
+        // Note: If blocked by browser autoplay policy, it will remain muted until user click
+        document.addEventListener('DOMContentLoaded', () => {
+            audio.play().then(() => {
+                // Optional: Unmute if browser policy allows
+                audio.muted = false;
+            }).catch(error => {
+                console.log("Autoplay unmuted was blocked. User interaction required.");
+            });
+        });
+    </script>
     <script src="script.js"></script>
 </body>
 
