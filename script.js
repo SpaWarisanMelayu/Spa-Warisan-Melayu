@@ -53,46 +53,24 @@ function updateShopStatus() {
   }
 }
 
-// --- VISITOR COUNTER API (UPDATED FOR V2 STANDARD) ---
+// --- VISITOR COUNTER ---
 document.addEventListener("DOMContentLoaded", () => {
-  // Run operating hours script on DOM initialization
   updateShopStatus();
 
   const counterElement = document.getElementById("visit-count");
   if (!counterElement) return;
 
-  // REPLACE THESE: Use your registered Workspace name and API token from your counterapi.dev dashboard
-  const WORKSPACE = "spawarisanmelayu";
-  const COUNTER_KEY = "visits";
-  const API_TOKEN = "ut_qx1MZUaZ8V4sx3eoErIO0T31ILtFPyOWPIyfb7T6";
+  const counter = new Counter({
+    workspace: "spawarisanmelayu"
+  });
 
-  // Correct API v2 structure with target parameters
-  fetch(`https://counterapi.dev{WORKSPACE}/counters/${COUNTER_KEY}/up`, {
-    method: "POST", // V2 uses POST requests to accurately increment counts
-    headers: {
-      Authorization: `Bearer ${API_TOKEN}`,
-      "Content-Type": "application/json",
-    },
-  })
-    .then((res) => {
-      if (!res.ok) throw new Error(`HTTP error! Status: ${res.status}`);
-      return res.json();
-    })
+  counter
+    .up("visits")
     .then((result) => {
-      // Safe validation fallback checking for proper payload nesting
-      if (result && result.data && result.data.count !== undefined) {
-        counterElement.innerText = Number(result.data.count).toLocaleString();
-      } else {
-        counterElement.innerText = "69,050+";
-      }
+      counterElement.textContent = Number(result.value).toLocaleString();
     })
-    .catch((err) => {
-      console.error("Counter API error:", err);
-      // Clean fallback default string so your layout never breaks for the user
-      counterElement.innerText = "69,050+";
+    .catch((error) => {
+      console.error("Visitor counter error:", error);
+      counterElement.textContent = "69,050+";
     });
-});
-
-document.querySelectorAll('img').forEach(img => {
-  img.addEventListener('contextmenu', e => e.preventDefault());
 });
