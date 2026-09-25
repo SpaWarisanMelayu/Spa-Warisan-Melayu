@@ -23,6 +23,7 @@ document.querySelectorAll(".nav-links a").forEach((link) => {
   });
 });
 
+
 // --- LIVE OPERATING HOURS STATUS INDICATOR ---
 function updateShopStatus() {
   const badge = document.getElementById("shop-status-badge");
@@ -32,45 +33,67 @@ function updateShopStatus() {
   const currentHour = now.getHours();
   const currentMinute = now.getMinutes();
 
-  // Operating limits set to 8:00 AM (8) until 12:00 AM (00)
   const openHour = 8;
   const closeHour = 24;
 
-  const currentTotalMinutes = currentHour * 60 + currentMinute;
+  const currentTotalMinutes =
+    currentHour * 60 + currentMinute;
+
   const openTotalMinutes = openHour * 60;
   const closeTotalMinutes = closeHour * 60;
 
-  // Check timeline calculations against boundaries
   if (
     currentTotalMinutes >= openTotalMinutes &&
     currentTotalMinutes < closeTotalMinutes
   ) {
-    badge.innerHTML = "🟢 We’re Open! <br> (Closing tonight at 12:00 AM)";
+    badge.innerHTML =
+      "🟢 We’re Open! <br> (Closing tonight at 12:00 AM)";
+
     badge.className = "status-badge open-badge";
   } else {
-    badge.innerHTML = "🔴 Currently Closed <br> (We open tomorrow at 8:00 AM)";
+    badge.innerHTML =
+      "🔴 Currently Closed <br> (We open tomorrow at 8:00 AM)";
+
     badge.className = "status-badge closed-badge";
   }
 }
 
-// --- VISITOR COUNTER ---
+
+// --- VISITOR COUNTER - COUNTERAPI V2 ---
 document.addEventListener("DOMContentLoaded", () => {
   updateShopStatus();
 
   const counterElement = document.getElementById("visit-count");
+
   if (!counterElement) return;
 
   const counter = new Counter({
-    workspace: "spawarisanmelayu"
+    workspace: "spawarisanmelayu",
+    accessToken: "ut_qx1MZUaZ8V4sx3eoErIO0T31ILtFPyOWPIyfb7T6"
   });
 
   counter
     .up("visits")
     .then((result) => {
-      counterElement.textContent = Number(result.value).toLocaleString();
+      if (result && result.value !== undefined) {
+        counterElement.textContent =
+          Number(result.value).toLocaleString();
+      } else {
+        throw new Error("Invalid counter response");
+      }
     })
     .catch((error) => {
       console.error("Visitor counter error:", error);
+
+      // Keep the website looking normal if CounterAPI is unavailable
       counterElement.textContent = "69,050+";
     });
+});
+
+
+// --- PREVENT IMAGE CONTEXT MENU ---
+document.querySelectorAll("img").forEach((img) => {
+  img.addEventListener("contextmenu", (e) => {
+    e.preventDefault();
+  });
 });
